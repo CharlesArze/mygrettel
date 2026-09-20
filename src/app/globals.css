@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* General Sans — self-hosted, reemplaza Neue Montreal (comercial) del original */
+@font-face {
+  font-family: "General Sans";
+  src: url("../fonts/GeneralSans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("../fonts/GeneralSans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("../fonts/GeneralSans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("../fonts/GeneralSans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Paleta de marca — Grettel_Manual_de_Marca.md, sección 06 */
+  --color-brand: #c40f58; /* magenta protagonista (reemplaza el verde #025A3C del original) */
+  --color-ink: #000000; /* negro — contraste */
+  --color-paper: #ffffff; /* blanco puro — contraste */
+  --color-cream: #eee0be; /* crema dorado — acento ocasional */
+
+  --font-display: var(--font-anton), "Arial Narrow", sans-serif; /* reemplaza Obviously Condensed (comercial) */
+  --font-body: "General Sans", "Helvetica Neue", sans-serif; /* reemplaza Neue Montreal (comercial) */
+  /* Helvetica Neue es una fuente del sistema (viene instalada en macOS/iOS), no un
+     archivo para self-hostear — se referencia tal cual, sin bundlear el .ttf. */
+  --font-button: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --radius-card: 1.875rem; /* 30px medidos en el original, a 1rem = 16px */
+
+  /* padding vertical de sección: 137.5px medidos a 17.1833px = 1rem raíz -> 8rem */
+  --space-section-y: 8rem;
+}
+
+@theme inline {
+  --color-brand: var(--color-brand);
+  --color-ink: var(--color-ink);
+  --color-paper: var(--color-paper);
+  --color-cream: var(--color-cream);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-button: var(--font-button);
+  --radius-card: var(--radius-card);
+  --spacing-section-y: var(--space-section-y);
+}
+
+html {
+  /*
+   * Sistema de escala fluida medido en el sitio de referencia: html font-size
+   * escala con el viewport y TODO lo demás cuelga de ahí en rem. Clamp entre
+   * el tamaño de un móvil chico y el de un desktop grande para no perder
+   * legibilidad en los extremos.
+   */
+  font-size: clamp(14px, 1vw, 19px);
+  scroll-behavior: auto; /* el scroll suave lo controla Lenis, no el navegador */
+  scroll-padding-top: 7rem; /* header fijo: que los links con #ancla no queden tapados debajo */
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-brand);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+/* Lenis: oculta el scrollbar nativo mientras el smooth scroll está activo */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
